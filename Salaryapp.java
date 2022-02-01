@@ -9,28 +9,30 @@ public class Salaryapp {
 		// TODO Auto-generated method stub
 
 		Scanner keyboard = new Scanner(System.in);
-	    
-	    // hour and minute entries
+
 	    int Hour;
 	    do {
 	    System.out.println("Please enter your starting hour [0-23]:");
 	        Hour = keyboard.nextInt();
-	    } while (Hour<0||Hour>23);
-	    
-	    if (Hour<=7) {
-	    	System.out.println("Your starting hour is after midnight.");	
-	    	}
-	    	else {
-	    	System.out.println("Your starting time is before midnight.");
-	    }
+	    } while (Hour<0||Hour>23); 
 	    
 	    int Minutes;
 	    do {
 	        System.out.println("Please enter your starting minutes [0-59]:");
 	        Minutes = keyboard.nextInt();
 	    }while (Minutes<0||Minutes>59);
-	   
-	    //System.out.println("Your starting time is:" + Hour + ":" + Minutes);
+	   	
+	    String[] weekdays = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+	    
+	    int StartDay;
+	    System.out.println("Please choose the the day corresponding to your start of work\n[1] Monday\n[2] Tuesday\n...\n[7] Sunday");
+	    StartDay = keyboard.nextInt();
+	    System.out.println("Your start day of work is a: " + weekdays[StartDay -1]);
+	    
+	    
+	    
+	  //  System.out.println("");
+	    //System.out.println( "You've worked starting on a day in the: " + dayType);
 	    
 	    int EndHour;
 	    do {
@@ -43,13 +45,14 @@ public class Salaryapp {
 	        System.out.println("Please enter your ending time minutes [0-59]:");
 	        EndMinutes = keyboard.nextInt();
 	    }while (EndMinutes<0||EndMinutes>59);
-	      
+	    
+	    int EndDay;
+	    System.out.println("Please choose the day corresponding to your end day of work\n[1] Monday\n[2] Tuesday\n...\n[7] Sunday");
+	    EndDay = keyboard.nextInt();
+	    System.out.println("Your end day of work is a: " + weekdays[EndDay -1]);
 	    
 	    
-	    // output hour and minute entries
-	   
-	    //System.out.println("Your ending time is:" + EndHour + ":" + EndMinutes);
-	     
+	      	     
 	    int TotalHours;
 	    if (Hour<=EndHour) {
 	    TotalHours=EndHour-Hour;
@@ -57,8 +60,10 @@ public class Salaryapp {
 	    TotalHours=(EndHour-Hour)+24;
 	    }
 	    
-	    //System.out.println("Total Hours worked:" + TotalHours);
-	   
+	    int TotalHourstoMin;
+	    TotalHourstoMin=(TotalHours/60);
+	    System.out.println("Total hours in minutes is:"+ TotalHourstoMin);
+	    	   
 	    int TotalMinutes;
 	    if (Minutes<=EndMinutes) {
 	    TotalMinutes=EndMinutes-Minutes;
@@ -70,15 +75,7 @@ public class Salaryapp {
 	    double RateHour = 11.5;
 	    double MinToHour = (TotalMinutes/(double)60);
 	    double Salary = (TotalHours*RateHour)+(MinToHour*RateHour);  
-	   
-	    String[] weekdays = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
-	   
-	    // Day of the week code
-	    int WeekDay;
-	    System.out.println("Please fill in a number corresponding to the day\n[1] Monday\n[2] Tuesday\n...\n[7] Sunday");
-	    WeekDay = keyboard.nextInt();
-	    System.out.println("Your day of the week is: " + weekdays[WeekDay -1]);  
-	   
+	    	
 	    double SatRateHour = (11.5)*(1+0.25);
 	    double SatMinToHour = (TotalMinutes/(double)60);
 	    double SatSalary = (TotalHours*SatRateHour)+(SatMinToHour*SatRateHour);
@@ -86,10 +83,10 @@ public class Salaryapp {
 	    double SunRateHour = (11.5)*(1+0.50);
 	    double SunMinToHour = (TotalMinutes/(double)60);
 	    double SunSalary = (TotalHours*SunRateHour)+(SunMinToHour*SunRateHour);
-	   
+	    
 	    String dayType;
-	   
-	    switch (WeekDay) {
+		   
+	    switch (StartDay) {
 	    case 1:
 	    case 2:
 	    case 3:
@@ -99,24 +96,24 @@ public class Salaryapp {
 	        System.out.printf("Your total earnings for this Weekday are: €%.2f", Salary);
 	        break;
 	    case 6:
-	    dayType = "Weekend";
+	   dayType = "Weekend";
 	    System.out.printf("Your total earnings for this Saturday are: €%.2f", SatSalary);
 	    break;
 	    case 7:
-	        dayType = "Weekend";
-	        System.out.printf("Your total earnings for this Sunday are: €%.2f", SunSalary);
+	     dayType = "Weekend";
+	      System.out.printf("Your total earnings for this Sunday are: €%.2f", SunSalary);
 	        break;
 	       
 	    default:
-	        dayType = "Invalid daytype";
+	       dayType = "Invalid daytype";
 	   
 	    }
+	   
 	    System.out.println("");
 	    System.out.println( "You've worked on a day in the: " + dayType);
-	   
 	}
 
-		
+	
 	}
 
-
+ 
